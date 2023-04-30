@@ -10,6 +10,10 @@ def mentes():
     with open('bevasarlas.csv', 'a') as f:
         sor = nev + ',' + ','.join(termekek) + '\n'
         f.write(sor)
+
+    nev_input.delete(0, tk.END)
+    termekek_input.delete(0, tk.END)
+
     # frissíti az ablak tartalmát
     betoltes()
     osszesites()
