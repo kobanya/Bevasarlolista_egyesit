@@ -4,7 +4,7 @@ from tkinter import scrolledtext
 
 def mentes():
     nev = nev_input.get().capitalize()
-    termekek = termekek_input.get().split(",")
+    termekek = termekek_input.get().lower().split(",")
 
     # fájlba írás
     with open('bevasarlas.csv', 'a') as f:
@@ -65,24 +65,25 @@ root.title("Bevásárlólista")
 
 # Név beviteli mező létrehozása
 nev_label = tk.Label(root, text="Név:")
-nev_label.grid(row=0, column=0, sticky="w")
+nev_label.grid(row=0, column=0, sticky="w", padx=(15,0))
 
 nev_input = tk.Entry(root)
 nev_input.grid(row=0, column=1)
 
 # Termékek beviteli mező létrehozása
 termekek_label = tk.Label(root, text="Termékek:")
-termekek_label.grid(row=1, column=0, sticky="w")
+termekek_label.grid(row=1, column=0, sticky="w",padx=(15,0))
 
-termekek_input = tk.Entry(root)
+termekek_input = tk.Entry(root, width=50)
 termekek_input.grid(row=1, column=1)
+
 
 # Mentés gomb létrehozása
 mentes_button = tk.Button(root, text="Mentés", command=mentes)
-mentes_button.grid(row=2, column=0)
+mentes_button.grid(row=2, column=1)
 
 # Táblázat létrehozása
-scrolled_text = scrolledtext.ScrolledText(root, width=100, height=15)
+scrolled_text = scrolledtext.ScrolledText(root, width=100, height=10)
 scrolled_text.grid(row=3, columnspan=2, padx=10, pady=10)
 
 
