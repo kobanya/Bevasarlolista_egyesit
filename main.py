@@ -20,6 +20,7 @@ def betoltes():
 
     with open('bevasarlas.csv', 'r') as f:
         sorok = f.read().splitlines()
+        sorok.sort()
         for sor in sorok:
             sor_text = sor.replace(",", "\t\t")
             scrolled_text.insert(tk.END, sor_text + "\n")
@@ -89,6 +90,9 @@ def osszesites():
                 else:
                     termekek[termek] = 1
 
+    # rendezés a kulcsok (termékek) alapján
+    rendezett_termekek = sorted(termekek.items())
+
     # Új ScrolledText mező létrehozása az összesített lista megjelenítéséhez
     scrolled_text_osszesites = scrolledtext.ScrolledText(root, width=100, height=15)
     scrolled_text_osszesites.grid(row=6, columnspan=2, padx=10, pady=10)
@@ -97,7 +101,7 @@ def osszesites():
     scrolled_text_osszesites.insert(tk.END, "Termékek összesítése:\n\n")
     scrolled_text_osszesites.insert(tk.END, "Termék\t\tDarabszám\n")
     scrolled_text_osszesites.insert(tk.END, "------\t\t---------\n")
-    for termek, db in termekek.items():
+    for termek, db in rendezett_termekek:
         scrolled_text_osszesites.insert(tk.END, f"{termek}\t\t{db}\n")
 
 betoltes()
