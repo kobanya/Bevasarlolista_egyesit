@@ -1,5 +1,4 @@
 #NB. 2023.04.26
-
 import tkinter as tk
 from tkinter import scrolledtext
 
@@ -11,6 +10,9 @@ def mentes():
     with open('bevasarlas.csv', 'a') as f:
         sor = nev + ',' + ','.join(termekek) + '\n'
         f.write(sor)
+    # frissíti az ablak tartalmát
+    betoltes()
+    osszesites()
 
 def betoltes():
     # Előző tartalom törlése
@@ -21,6 +23,8 @@ def betoltes():
         for sor in sorok:
             sor_text = sor.replace(",", "\t\t")
             scrolled_text.insert(tk.END, sor_text + "\n")
+    osszesites()
+
 
 def change_color(event):
     widget = event.widget
@@ -52,9 +56,6 @@ termekek_input.grid(row=1, column=1)
 mentes_button = tk.Button(root, text="Mentés", command=mentes)
 mentes_button.grid(row=2, column=0)
 
-# Betöltés gomb létrehozása
-betoltes_button = tk.Button(root, text="Ablak betöltése", command=betoltes)
-betoltes_button.grid(row=2, column=1)
 
 # Táblázat létrehozása
 scrolled_text = scrolledtext.ScrolledText(root, width=100, height=15)
@@ -89,7 +90,7 @@ def osszesites():
                     termekek[termek] = 1
 
     # Új ScrolledText mező létrehozása az összesített lista megjelenítéséhez
-    scrolled_text_osszesites = scrolledtext.ScrolledText(root, width=50, height=15)
+    scrolled_text_osszesites = scrolledtext.ScrolledText(root, width=100, height=15)
     scrolled_text_osszesites.grid(row=6, columnspan=2, padx=10, pady=10)
 
     # Az összesített lista kiírása táblázatos formában
@@ -99,10 +100,6 @@ def osszesites():
     for termek, db in termekek.items():
         scrolled_text_osszesites.insert(tk.END, f"{termek}\t\t{db}\n")
 
-
-# Összesítés gomb létrehozása
-osszesites_gomb = tk.Button(root, text="Termékek összesítése", command=osszesites)
-osszesites_gomb.grid(row=5, columnspan=2, pady=10)
-
+betoltes()
 
 root.mainloop()
